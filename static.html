@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>hurgle spoiler</title>
+    <style>
+        .letter {
+            background-color: black;
+            color: purple;
+            padding: 4px;
+            border: 4px green;
+            border-collapse: separate;
+            border-spacing: 1em 0.5em;
+        }
+
+        .spoiler-row {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .spoiler-box {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            border: 1px solid black;
+            cursor: pointer;
+            /* object-fit: cover; */
+            text-align: center;
+            vertical-align: middle;
+            font-size: 3em;
+        }
+
+        .spoiler-box p {
+            margin: 0;
+            padding: 10px;
+            visibility: hidden;
+        }
+
+        .spoiler-box p.hidden {
+            visibility: visible;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div style="width: 50%;margin: 0 auto;">
+        <h1>Spoiler!!</h1>
+        <h2 id="date">Date: </h2>
+        <div>
+            <div class="spoiler-row" id="spoiler-row">
+            </div>
+        </div>
+</body>
+<script>
+
+    'use strict';
+
+    const template = ""
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Calculate dayOfYear, from StackOverflow answer
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        const millisecondsSinceStartOfYear = new Date(yyyy, 0, 1).getTime();
+        const millisecondsSinceStartOfDay = new Date(yyyy, mm, dd).getTime();
+        const dayOfYear = Math.floor((millisecondsSinceStartOfDay - millisecondsSinceStartOfYear) / (1000 * 60 * 60 * 24));
+
+        let letterCount;
+        let word;
+
+        switch (yyyy) {
+            case 2023:
+                letterCount = 6;
+                word = answers[2023][dayOfYear];
+                break;
+            case 2024:
+                letterCount = 7;
+                word = answers[2024][dayOfYear];
+                break;
+            case 2025:
+                letterCount = 8;
+                word = answers[2025][dayOfYear];
+                break;
+        }
+
+        const spoilerRow = document.getElementById('spoiler-row');
+        for (let letterIndex = 0; letterIndex < letterCount; letterIndex += 1) {
+            let spoilerBox = document.createElement("div");
+            spoilerBox.addEventListener('click', () => {
+                spoilerBox.querySelector('p').classList.toggle('hidden');
+            });
+            spoilerBox.classList.add('spoiler-box');
+            let p = document.createElement("p");
+            p.textContent = word[letterIndex];
+            spoilerBox.append(p);
+            spoilerRow.append(spoilerBox);
+        }
+
+        // Get heading, show that we've loaded
+        const dateHeading = document.getElementById('date');
+        dateHeading.textContent = `Date: ${yyyy}-${mm}-${dd} (#${dayOfYear})`;
+
+        console.log("Finished loading.");
+    });
+
+</script>
+<script src="answers.js"></script>
+
+</html>

@@ -3,6 +3,7 @@
 import re
 import sys
 import random
+import datetime
 
 CAPS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 LOWS = "abcdefghijklmnopqrstuvwxyz"
@@ -24,7 +25,7 @@ STRINGS = {
         "en": "Play again? [Y/n] ",
     },
     "get_count": {
-        "en": "Number of letters in the game (3-10, default 6): ",
+        "en": "Number of letters in the game (3-10, default {0}): ",
     },
     "one_left": {
         "en": "** Only one word remains: {0}",
@@ -89,8 +90,8 @@ RULESETS = {
 }
 
 
-def iloc(str_id, newline=False):
-    prompt = STRINGS[str_id][lang]
+def iloc(str_id, newline=False, params=[]):
+    prompt = STRINGS[str_id][lang].format(*params)
     if newline:
         print(prompt, flush=True)
     else:
@@ -110,7 +111,7 @@ def ploc(str_id, newline=True, params=[]):
 class GuessGame(object):
     COUNT_MIN = 3
     COUNT_MAX = 10
-    COUNT_DEFAULT = 6
+    COUNT_DEFAULT = 6 if datetime.datetime.now().year == 2023 else 7
 
     def __init__(self, length=-1, rules=""):
         if (length < self.COUNT_MIN) or length > self.COUNT_MAX:
@@ -347,7 +348,7 @@ class GuessGame(object):
 def main():
     try:
         try:
-            game_count = int(iloc("get_count"))
+            game_count = int(iloc("get_count", params=[GuessGame.COUNT_DEFAULT]))
         except ValueError as e:
             game_count = GuessGame.COUNT_DEFAULT
 
