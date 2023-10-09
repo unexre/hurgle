@@ -4,7 +4,7 @@
   "description": "Guesser for Hurgle (and Wordle)",
   "main": "index.js",
   "scripts": {
-    "build": "html-minifier-terser --collapse-whitespace --remove-comments --minify-js false --minify-css false static.html -o index.html",
+    "build": "html-minifier-terser --collapse-whitespace --remove-comments --minify-js true --minify-css true static.html -o index.html",
     "clean": "rm index.html"
   },
   "author": "",
