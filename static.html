@@ -63,7 +63,7 @@
         const yyyy = today.getFullYear();
         const msJan01 = new Date(yyyy, 0, 0).getTime();
         const msToday = today.getTime();
-        const dayOfYear = Math.floor((msToday - msJan01) / (1000 * 60 * 60 * 24));
+        const dayOfYear = Math.floor((msToday - msJan01) / (1000 * 60 * 60 * 24)) - 1;
 
         // do some higher level math
         const letterCount = yyyy - 2017;
