@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>hurgle spoiler</title>
+    <style>
+        .letter {
+            background-color: black;
+            color: purple;
+            padding: 4px;
+            border: 4px green;
+            border-collapse: separate;
+            border-spacing: 1em 0.5em;
+        }
+
+        .spoiler-row {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .spoiler-box {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            border: 1px solid black;
+            cursor: pointer;
+            /* object-fit: cover; */
+            text-align: center;
+            vertical-align: middle;
+            font-size: 3em;
+        }
+
+        .spoiler-box p {
+            margin: 0;
+            padding: 10px;
+            visibility: hidden;
+        }
+
+        .spoiler-box p.hidden {
+            visibility: visible;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div style="width: 50%;margin: 0 auto;">
+        <h1>Hurgle Spoiler!!</h1>
+        <h2 id="date">Loading...</h2>
+        <div>
+            <div class="spoiler-row" id="spoiler-row">
+            </div>
+        </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Calculate dayOfYear, from StackOverflow answer
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        const millisecondsSinceStartOfYear = new Date(yyyy, 0, 1).getTime();
+        const millisecondsSinceStartOfDay = new Date(yyyy, mm, dd).getTime();
+        const dayOfYear = Math.floor((millisecondsSinceStartOfDay - millisecondsSinceStartOfYear) / (1000 * 60 * 60 * 24));
+
+        // do some higher level math
+        const letterCount = yyyy - 2017;
+
+        // grab today's word
+        const word = answers[`${yyyy}`][dayOfYear];
+
+        // draw the letter boxes
+        const spoilerRow = document.getElementById('spoiler-row');
+        for (let letterIndex = 0; letterIndex < letterCount; letterIndex += 1) {
+            let spoilerBox = document.createElement("div");
+            spoilerBox.addEventListener('click', () => {
+                spoilerBox.querySelector('p').classList.toggle('hidden');
+            });
+            spoilerBox.classList.add('spoiler-box');
+            let p = document.createElement("p");
+            p.textContent = word[letterIndex];
+            spoilerBox.append(p);
+            spoilerRow.append(spoilerBox);
+        }
+
+        // Get heading, show that we've loaded
+        const dateHeading = document.getElementById('date');
+        dateHeading.textContent = `for Date: ${yyyy}-${mm}-${dd}, day #${dayOfYear}`;
+    });
+
+</script>
+<script src="answers.js"></script>
+
+</html>
