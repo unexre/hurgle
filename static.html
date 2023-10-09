@@ -59,11 +59,11 @@
         // Calculate dayOfYear, from StackOverflow answer
         const today = new Date();
         const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
         const yyyy = today.getFullYear();
-        const millisecondsSinceStartOfYear = new Date(yyyy, 0, 1).getTime();
-        const millisecondsSinceStartOfDay = new Date(yyyy, mm, dd).getTime();
-        const dayOfYear = Math.floor((millisecondsSinceStartOfDay - millisecondsSinceStartOfYear) / (1000 * 60 * 60 * 24));
+        const msJan01 = new Date(yyyy, 0, 0).getTime();
+        const msToday = today.getTime();
+        const dayOfYear = Math.floor((msToday - msJan01) / (1000 * 60 * 60 * 24));
 
         // do some higher level math
         const letterCount = yyyy - 2017;
