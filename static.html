@@ -47,8 +47,8 @@
 
 <body>
     <div style="width: 50%;margin: 0 auto;">
-        <h1>Spoiler!!</h1>
-        <h2 id="date">Date: </h2>
+        <h1>Hurgle Spoiler!!</h1>
+        <h2 id="date">Loading...</h2>
         <div>
             <div class="spoiler-row" id="spoiler-row">
             </div>
@@ -71,24 +71,13 @@
         const millisecondsSinceStartOfDay = new Date(yyyy, mm, dd).getTime();
         const dayOfYear = Math.floor((millisecondsSinceStartOfDay - millisecondsSinceStartOfYear) / (1000 * 60 * 60 * 24));
 
-        let letterCount;
-        let word;
+        // do some higher level math
+        const letterCount = yyyy - 2017;
 
-        switch (yyyy) {
-            case 2023:
-                letterCount = 6;
-                word = answers[2023][dayOfYear];
-                break;
-            case 2024:
-                letterCount = 7;
-                word = answers[2024][dayOfYear];
-                break;
-            case 2025:
-                letterCount = 8;
-                word = answers[2025][dayOfYear];
-                break;
-        }
+        // grab today's word
+        const word = answers[`${yyyy}`][dayOfYear];
 
+        // draw the letter boxes
         const spoilerRow = document.getElementById('spoiler-row');
         for (let letterIndex = 0; letterIndex < letterCount; letterIndex += 1) {
             let spoilerBox = document.createElement("div");
@@ -104,9 +93,7 @@
 
         // Get heading, show that we've loaded
         const dateHeading = document.getElementById('date');
-        dateHeading.textContent = `Date: ${yyyy}-${mm}-${dd} (#${dayOfYear})`;
-
-        console.log("Finished loading.");
+        dateHeading.textContent = `for Date: ${yyyy}-${mm}-${dd}, day #${dayOfYear}`;
     });
 
 </script>

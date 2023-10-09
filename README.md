@@ -16,9 +16,9 @@ For copyright, ethical, up-to-dateness, and i-dont-want-to-anger-github reasons,
 
 **You only need to perform this step once. The output will be used by both tools.**
 
-Run `./word_maker.py` in the root of this repository. It will fetch the game's source code, extract the word list and answer list, and dump those values into `hurgle-me.txt.tmp` and `answers.js.tmp`.
+Run `./fetch_dictionary.py` in the root of this repository. It will fetch the game's source code, extract the valid word list and daily answer list, and dump those values into `hurgle-me.txt.tmp` and `answers.js.tmp`.
 
-Check the `.tmp` files contain approximately-readable words. Don't actually read them, though. Determining how to do this is an exercise left to the reader.
+Check the `.tmp` files contain approximately-readable words. Don't actually read them, though. You'll spoil the game for yourself. Determining how to do this is an exercise left to the reader.
 
 Rename the files to remove the `.tmp` extension, overwriting old files if necessary.
 
