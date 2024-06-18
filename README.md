@@ -45,7 +45,3 @@ If you just want to know a single letter without having the rest of today's word
 Open [static.html](static.html) in your browser, using File -> Open or something like that.
 
 It will display gray boxes, one for each letter in today's word. Click on a box to reveal (or re-hide) that specific letter.
-
-### Online Version
-
-This is also hosted at `hurgle.<name of the developer>.me` if you don't want to download it from Github.
